@@ -1,0 +1,1 @@
+El reto para '16-PROYECTO-EnviarEmail' consiste en agregar un nuevo campo de correo al formulario llamado 'C.C' el cual no es obligatorio de llenar; así que, se habilita el botón de envío del formulario, con o sin información en este ultimo campo. En dicho caso que el campo tenga información tendra que ser validado por el sistema (Una dirección de correo funcional).
