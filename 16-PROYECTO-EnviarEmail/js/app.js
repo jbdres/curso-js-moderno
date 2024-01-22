@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', function () { // Se ejecuta cuando
 
     function enviarEmail(e) {
         e.preventDefault();
-
+        btnSubmit.disabled = true;
+        btnSubmit.classList.add('opacity-50');
+        
         // Mostrar y centrar el spinner
         spinner.classList.add('flex');
         spinner.classList.remove('hidden');
