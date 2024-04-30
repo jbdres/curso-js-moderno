@@ -1,18 +1,14 @@
-// Heredar una clase que esta siendo importada
-import { nombreCliente, ahorro, mostrarInformacion, tieneSaldo, Cliente } from "./cliente.js";
-import { Empresa } from "./empresa.js";
+/** Export default y alias a los imports
+ * - Al traer un export default desde otro archivo, este va por fuera de las llaves {} y con coma ,
+ * - Al solo poder tener un export default por archivo, no importa el nombre con el que se traiga el elemento, en este ejemplo, la funcion en cliente.js tiene como nombre 'nuevaFuncion' y aqui se llama con 'otroNombre', sin embargo, es recomendable que tenga el mismo.
+ */
+
+import otroNombre, { nombreCliente as ac, ahorro, mostrarInformacion as mi, tieneSaldo} from "./cliente.js";
+otroNombre(); // export default
 
     // Variables
-console.log(nombreCliente);
+console.log(ac); // usando alias
 console.log(ahorro);
     // Funciones
-console.log(mostrarInformacion(nombreCliente, ahorro));
+console.log(mi(ac, ahorro)); // Usando alias
 tieneSaldo(ahorro);
-    // Clases
-const cliente = new Cliente(nombreCliente, ahorro);
-console.log(cliente);
-console.log(cliente.mostrarInformacion());
-
-// Importar empresa: Es buena practica que todos los imports esten al inicio del archivo
-const empresa = new Empresa('Codigo con Juan', 100, 'Aprendizaje en linea');
-console.log(empresa);
