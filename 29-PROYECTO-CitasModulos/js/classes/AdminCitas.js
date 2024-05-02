@@ -1,5 +1,7 @@
-// imports
+// Imports
 import { contenedorCitas } from "../selectores.js"
+import { cargarEdicion } from "../funciones.js"
+
 // Exportar por default la clase
 export default class AdminCitas {
     constructor() {
