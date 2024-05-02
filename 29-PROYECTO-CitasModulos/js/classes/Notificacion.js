@@ -1,3 +1,5 @@
+import { formulario } from "../selectores.js";
+
 // Exportar por default la clase
 export default class Notificacion {
 
@@ -23,7 +25,6 @@ export default class Notificacion {
         alerta.textContent = this.texto
 
         // Insertar en el DOM
-            // TODO Importar el archivo correspondiente a los selectores para conocer al formulario y con esto insertar la alerta.
         formulario.parentElement.insertBefore(alerta, formulario)
 
         // Quitar después de 5 segundos

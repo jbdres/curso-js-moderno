@@ -1,16 +1,10 @@
-// Importar la clase de notificacion
 import Notificacion from "./classes/Notificacion.js";
+    // Importar los selectores
+import {pacienteInput, propietarioInput, emailInput, fechaInput, sintomasInput, formulario, formularioInput, contenedorCitas} from "./selectores.js";
 
-// Selectores
-const pacienteInput = document.querySelector('#paciente')
-const propietarioInput = document.querySelector('#propietario')
-const emailInput = document.querySelector('#email')
-const fechaInput = document.querySelector('#fecha')
-const sintomasInput = document.querySelector('#sintomas')
-
-const formulario = document.querySelector('#formulario-cita')
-const formularioInput = document.querySelector('#formulario-cita input[type="submit"]')
-const contenedorCitas = document.querySelector('#citas')
+/**
+ * * Los selectores se han movido a ./selectores.js
+ */
 
 // Eventos
 pacienteInput.addEventListener('change', datosCita)
@@ -32,11 +26,6 @@ const citaObj = {
     fecha: '',
     sintomas: ''
 }
-
-/**
- * * La clase 'Notificacion' se ha cortado y pegado completamente en ./classes/Notificacion.js
- */
-
 
 class AdminCitas {
     constructor() {
