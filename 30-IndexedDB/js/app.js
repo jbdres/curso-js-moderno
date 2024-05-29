@@ -1,4 +1,4 @@
-// Creando la base de datos
+// Creando las Tablas
 
 // Conocer los metodos para la base de datos: window.indexedDB
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,8 +22,21 @@ function crmDB() {
     }
 
     // Configuracion de la base de datos (solo se ejecuta una vez aunque se vuelva a llamar)
-    crmDB.onupgradeneeded = function() {
-        console.log('Este metodo solo se ejecuta una vez');
+    crmDB.onupgradeneeded = function(e) {
+
+        const db = e.target.result; // Referencia de la base de datos
+        const objectStore = db.createObjectStore('crm', {
+            keyPath: 'crm',
+            autoIncrement: true
+        });
+
+         // Definir las columnas
+        objectStore.createIndex('nombre', 'nombre', { unique: false });
+        objectStore.createIndex('email', 'email', { unique: true });
+        objectStore.createIndex('telefono', 'telefono', { unique: true})
+
+        console.log('Columnas creadas');
+
     }
 
 }
