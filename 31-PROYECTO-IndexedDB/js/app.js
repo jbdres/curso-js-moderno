@@ -180,7 +180,7 @@ class UI {
                  * * Nota:
                  * - Para que al momento en el que se oprima el boton de modificar una cita, se reconozca el registro al cual hace referencia cada boton, es necesario crear la variable 'cita' para guardar el valor del curso referente a cada registro en la base de datos, ya que si solemente pusieramos como argumento 'cursor.value' en la funcion de carga de edicion, este argumento contendria los datos de l aultima cita guardada en la base de datos.
                  */
-                
+
                 const cita = cursor.value;
                 btnModificar.onclick = () => cargarEdicion(cita);
 
@@ -312,9 +312,23 @@ function reiniciarObjeto() {
 
 
 function eliminarCita(id) {
+
     administrarCitas.eliminarCita(id);
 
-    ui.imprimirCitas()
+    // Eliminar cita en IndexedDB
+    const transaction = DB.transaction(['citas'], 'readwrite');
+    const objectStore = transaction.objectStore('citas');
+    objectStore.delete(id); // Eliminar usando el id
+
+    transaction.oncomplete = () => {
+        console.log(`Cita ${id} eliminada...`);
+        ui.imprimirCitas();
+    }
+
+    transaction.onerror = () => {
+        console.log('Hubo un error');
+    }
+
 }
 
 function cargarEdicion(cita) {
