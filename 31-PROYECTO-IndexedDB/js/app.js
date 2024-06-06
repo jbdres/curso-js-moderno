@@ -176,6 +176,12 @@ class UI {
                 btnModificar.classList.add('btn', 'btn-info', 'mr-2');
                 btnModificar.innerHTML = 'Modificar <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"></path></svg>';
 
+                /**
+                 * * Nota:
+                 * - Para que al momento en el que se oprima el boton de modificar una cita, se reconozca el registro al cual hace referencia cada boton, es necesario crear la variable 'cita' para guardar el valor del curso referente a cada registro en la base de datos, ya que si solemente pusieramos como argumento 'cursor.value' en la funcion de carga de edicion, este argumento contendria los datos de l aultima cita guardada en la base de datos.
+                 */
+                
+                const cita = cursor.value;
                 btnModificar.onclick = () => cargarEdicion(cita);
 
                     // Agregar los parrafos al divCita
@@ -234,14 +240,27 @@ function nuevaCita(e) {
     }
 
     if(editando) {
+
         // Estamos editando
         administrarCitas.editarCita( {...citaObj} );
 
-        ui.imprimirAlerta('Guardado Correctamente');
+        // Editando en IndexedDB
+        const transaction = DB.transaction(['citas'], 'readwrite');
+        const objectStore = transaction.objectStore('citas');
+        objectStore.put(citaObj); // Actualizar en la base de datos
 
-        formulario.querySelector('button[type="submit"]').textContent = 'Crear Cita';
+        transaction.oncomplete = () => {
 
-        editando = false;
+            ui.imprimirAlerta('Guardado Correctamente');
+            formulario.querySelector('button[type="submit"]').textContent = 'Crear Cita';
+            editando = false;
+
+        }
+
+        transaction.onerror = () => {
+            console.log('Hubo un error');
+        }
+
 
     } else {
         // Nuevo Registrando
