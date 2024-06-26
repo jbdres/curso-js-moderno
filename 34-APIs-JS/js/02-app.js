@@ -2,6 +2,9 @@
 /** 
  * * Nota:
  * - Intersection Observer es una API nativa de JavaScript que determina si un elemento del DOM es visible o no en pantalla
+ * * Aplicaciones:
+ * - croll infinito en la aplicacion, como lo hace Instagram, Facebook o X; donde al llegar por scroll a la ultima publicacion, se cargan mas y asi sucesivamente.
+ * - Lazy loading: Renderizar contenido en la pagina web hasta que el usuario o el navegador lo necesite.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
